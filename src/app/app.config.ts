@@ -7,6 +7,7 @@ import {routerReducer } from "@ngrx/router-store";
 
 import { routes } from './app.routes';
 import { authReducer } from './store/auth/auth.reducer';
+import { themeReducer } from './store/theme/theme.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,7 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore({
       route: routerReducer,
-      auth: authReducer
+      auth: authReducer,
+      theme: themeReducer
     }),
 ]
 };

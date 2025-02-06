@@ -1,37 +1,41 @@
-<div class="flex items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600 p-4">
-  <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+<div [ngClass]="(isDarkTheme$ | async) ? 'bg-gradient-to-r from-gray-900 to-black text-white' : 'bg-gradient-to-r from-gray-100 to-gray-300 text-gray-900'"
+     class="min-h-screen flex items-center justify-center p-6">
+  <div [ngClass]="(isDarkTheme$ | async) ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'"
+       class="p-8 rounded-lg shadow-lg w-full max-w-md">
 
-    <div class="mt-6 bg-gray-50 p-6 rounded-lg shadow">
-      <h2 class="text-xl font-bold text-center text-gray-800 mb-4">Login</h2>
-      <form [formGroup]="loginForm" class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Username</label>
-          <input
-            type="text"
-            formControlName="username"
-            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Enter your username"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Password</label>
-          <input
-            type="password"
-            formControlName="password"
-            class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Enter your password"
-          />
-        </div>
+    <h2 [ngClass]="(isDarkTheme$ | async) ? 'text-white' : 'text-gray-800'"
+        class="text-xl font-bold text-center">
+      Login
+    </h2>
 
-        <p *ngIf="errorMessage" class="text-red-500">{{ errorMessage }}</p>
-      </form>
-      <button
-        (click)="onClickLogin()"
-        [disabled]="!loginForm.valid"
-        class="w-full mt-4 bg-indigo-500 text-white py-2 rounded-lg font-semibold text-lg hover:bg-indigo-600 transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed"
-      >
-        Login
-      </button>
-    </div>
+    <form [formGroup]="loginForm" class="space-y-4">
+      <div>
+        <label [ngClass]="(isDarkTheme$ | async) ? 'text-gray-300' : 'text-gray-700'"
+               class="block text-sm font-medium">
+          Username
+        </label>
+        <input type="text" formControlName="username"
+               [ngClass]="(isDarkTheme$ | async) ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'"
+               class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+               placeholder="Enter your username" />
+      </div>
+      <div>
+        <label [ngClass]="(isDarkTheme$ | async) ? 'text-gray-300' : 'text-gray-700'"
+               class="block text-sm font-medium">
+          Password
+        </label>
+        <input type="password" formControlName="password"
+               [ngClass]="(isDarkTheme$ | async) ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-900 border-gray-300'"
+               class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+               placeholder="Enter your password" />
+      </div>
+    </form>
+
+    <button (click)="onClickLogin()"
+            [disabled]="!loginForm.valid"
+            [ngClass]="(isDarkTheme$ | async) ? 'bg-indigo-600 hover:bg-indigo-700' : 'bg-indigo-500 hover:bg-indigo-600'"
+            class="w-full mt-4 text-white py-2 rounded-lg font-semibold text-lg transition-all duration-200 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:bg-gray-300 disabled:cursor-not-allowed">
+      Login
+    </button>
   </div>
 </div>
