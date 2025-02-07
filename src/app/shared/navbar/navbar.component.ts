@@ -34,4 +34,9 @@ export class NavbarComponent {
   onToggleTheme() {
     this.store.dispatch(toggleTheme());
   }
+
+  returnToLogin() {
+    this.store.dispatch(logout());
+    this.route.navigate(['/login']);
+  }
 }

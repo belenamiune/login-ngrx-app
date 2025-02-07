@@ -7,6 +7,7 @@
 >
   <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
     <div 
+    (click)="returnToLogin()"
     [ngClass]="{
       'text-black text-2xl font-bold': !(isDarkTheme$ | async),
       'text-white text-2xl font-bold': (isDarkTheme$ | async)
