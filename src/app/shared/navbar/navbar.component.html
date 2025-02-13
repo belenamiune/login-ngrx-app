@@ -1,18 +1,7 @@
-<nav
-  class="p-4 shadow-lg transition-all duration-300"
-  [ngClass]="{
-    'bg-gradient-to-r from-blue-500 to-indigo-600': !(isDarkTheme$ | async),
-    'bg-gradient-to-r from-gray-800 to-black': (isDarkTheme$ | async)
-  }"
->
+<nav class="p-4 shadow-lg transition-all duration-300">
   <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
-    <div 
-    (click)="returnToLogin()"
-    [ngClass]="{
-      'text-black text-2xl font-bold': !(isDarkTheme$ | async),
-      'text-white text-2xl font-bold': (isDarkTheme$ | async)
-    }">
-      Login Ngrx App
+    <div>
+      <span>Login Ngrx App</span>
     </div>
 
     <div class="flex items-center space-x-6">
@@ -26,23 +15,16 @@
         </button>
       </ng-container>
       <ng-template #loggedOut>
-        <span class="text-white font-medium" 
-        [ngClass]="{
-          'text-black font-medium': !(isDarkTheme$ | async),
-          'text-white font-medium': (isDarkTheme$ | async)
-        }">Please log in</span>
+        <span class="font-bold">Please log in</span>
       </ng-template>
 
-      <button
-        (click)="onToggleTheme()"
-        class="text-white font-medium px-4 py-2 rounded-lg transition-all duration-300"
-        [ngClass]="{
-          'bg-gray-800 hover:bg-gray-700': !(isDarkTheme$ | async),
-          'bg-gray-300 text-gray-900 hover:bg-gray-400': (isDarkTheme$ | async)
-        }"
-      >
-        Toggle Theme
-      </button>
+      <button 
+      (click)="toggleTheme()"
+      class="p-2 rounded-full transition-all duration-300"
+    >
+      <span *ngIf="(theme$ | async) === 'light'">🌙</span>
+      <span *ngIf="(theme$ | async) === 'dark'">☀️</span>
+    </button>
     </div>
   </div>
 </nav>

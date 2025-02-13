@@ -17,7 +17,6 @@ import { Book, BookService } from '../../services/book.service';
 export class DashboardComponent {
   username$;
   isAuthenticated$;
-  isDarkTheme$;
   books$: Observable<Book[]> | undefined;
   isLoading$ = new BehaviorSubject<boolean>(true);
   error: string | undefined;
@@ -25,7 +24,6 @@ export class DashboardComponent {
   constructor(private store: Store, private route: Router, private bookService: BookService) {
     this.username$ =  this.store.select(selectUsername);
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
-    this.isDarkTheme$ = this.store.select(selectTheme);
   }
 
   ngOnInit(): void {

@@ -17,14 +17,12 @@ export class LoginComponent {
   loginForm: FormGroup;
   errorMessage = '';
 
-  isDarkTheme$;
 
   constructor(private fb: FormBuilder, private store: Store, private route: Router) {
     this.loginForm = this.fb.group({
       username: [''],
       password: ['']
     });
-    this.isDarkTheme$ = this.store.select(selectTheme);
   }
   
 
@@ -38,10 +36,11 @@ export class LoginComponent {
       const mockToken = '123tokenmock';
       this.store.dispatch(login({ username, token: mockToken }));
       setTimeout(() => {
-      console.log("paso")
+      console.log("login successful");
       this.route.navigate(['/dashboard']);
       }, 1000);
     } else {
+      console.log("login error");
       this.errorMessage = 'Usuario o contraseña incorrectos';
     }
   }

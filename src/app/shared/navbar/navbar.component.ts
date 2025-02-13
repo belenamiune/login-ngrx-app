@@ -5,7 +5,8 @@ import { logout } from '../../store/auth/auth.actions';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { selectTheme } from '../../store/theme/theme.selectors';
-import { toggleTheme } from '../../store/theme/theme.actions';
+import { setTheme } from '../../store/theme/theme.actions';
+import { take } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -17,22 +18,24 @@ import { toggleTheme } from '../../store/theme/theme.actions';
 export class NavbarComponent {
   isAuthenticated$;
   username$;
-  isDarkTheme$;
+  theme$;
 
   constructor(private store: Store, private route: Router) {
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
     this.username$ = this.store.select(selectUsername);
-    this.isDarkTheme$ = this.store.select(selectTheme);
+    this.theme$ = this.store.select(selectTheme);
   }
 
   onLogout() {
     this.store.dispatch(logout());
     this.route.navigate(['/login']);
-    this.store.dispatch(toggleTheme());
   }
 
-  onToggleTheme() {
-    this.store.dispatch(toggleTheme());
+  toggleTheme() {
+    this.store.select(selectTheme).pipe(take(1)).subscribe((currentTheme) => {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      this.store.dispatch(setTheme({ theme: newTheme }));
+    });
   }
 
   returnToLogin() {

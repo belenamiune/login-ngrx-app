@@ -1,8 +1,5 @@
 import { createSelector, createFeatureSelector } from '@ngrx/store';
-
-export interface ThemeState {
-  isDark: boolean;
-}
+import { ThemeState } from './theme.reducer';
 
 export const selectThemeState = createFeatureSelector<ThemeState>('theme');
-export const selectTheme = createSelector(selectThemeState, (state) => state.isDark);
+export const selectTheme = createSelector(selectThemeState, (state) => state.theme);
