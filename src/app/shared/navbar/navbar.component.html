@@ -6,7 +6,7 @@
 
     <div class="flex items-center space-x-6">
       <ng-container *ngIf="isAuthenticated$ | async; else loggedOut">
-        <span class="text-white font-medium">Welcome, {{ (username$ | async) }}</span>
+        <span class="font-medium">Welcome, {{ (username$ | async) }}</span>
         <button 
           (click)="onLogout()" 
           class="bg-white text-indigo-600 px-4 py-2 rounded-lg hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"

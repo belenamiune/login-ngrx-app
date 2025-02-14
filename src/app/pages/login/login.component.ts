@@ -4,8 +4,6 @@ import { Store } from '@ngrx/store';
 import { login } from '../../store/auth/auth.actions';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { selectTheme } from '../../store/theme/theme.selectors';
 
 @Component({
   selector: 'app-login',
@@ -18,14 +16,13 @@ export class LoginComponent {
   errorMessage = '';
 
 
-  constructor(private fb: FormBuilder, private store: Store, private route: Router) {
+  constructor(private fb: FormBuilder, private store: Store) {
     this.loginForm = this.fb.group({
       username: [''],
       password: ['']
     });
   }
   
-
   onClickLogin() {
     const { username, password } = this.loginForm.value;
 
@@ -37,7 +34,6 @@ export class LoginComponent {
       this.store.dispatch(login({ username, token: mockToken }));
       setTimeout(() => {
       console.log("login successful");
-      this.route.navigate(['/dashboard']);
       }, 1000);
     } else {
       console.log("login error");

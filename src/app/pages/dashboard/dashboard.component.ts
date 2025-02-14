@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectUsername, selectIsAuthenticated } from '../../store/auth/auth.selectors';
-import { logout } from '../../store/auth/auth.actions';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { selectTheme } from '../../store/theme/theme.selectors';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Book, BookService } from '../../services/book.service';
 
@@ -21,7 +18,7 @@ export class DashboardComponent {
   isLoading$ = new BehaviorSubject<boolean>(true);
   error: string | undefined;
   
-  constructor(private store: Store, private route: Router, private bookService: BookService) {
+  constructor(private store: Store, private bookService: BookService) {
     this.username$ =  this.store.select(selectUsername);
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
   }
@@ -39,10 +36,5 @@ export class DashboardComponent {
         console.error('Error:', error);
       }
     );
-  }
-
-  onLogout() {
-    this.store.dispatch(logout());
-    this.route.navigate(['**'])
   }
 }
