@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectIsAuthenticated, selectUsername } from '../../store/auth/auth.selectors';
-import { logout } from '../../store/auth/auth.actions';
-import { CommonModule } from '@angular/common';
-import { selectTheme } from '../../store/theme/theme.selectors';
-import { setTheme } from '../../store/theme/theme.actions';
-import { take } from 'rxjs';
+import { selectIsAuthenticated, selectUsername } from '../../../auth/store/auth.selectors';
+import { selectTheme } from '../../../theme/store/theme.selectors';
+import { logout } from '../../../auth/store/auth.actions';
+import { changeTheme } from '../../../theme/store/theme.actions';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +17,7 @@ import { take } from 'rxjs';
 export class NavbarComponent {
   isAuthenticated$;
   username$;
-  theme$;
+  theme$: Observable<string>;
 
   constructor(private store: Store) {
     this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
@@ -29,10 +29,8 @@ export class NavbarComponent {
     this.store.dispatch(logout());
   }
 
-  toggleTheme() {
-    this.store.select(selectTheme).pipe(take(1)).subscribe((currentTheme) => {
-      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-      this.store.dispatch(setTheme({ theme: newTheme }));
-    });
+  onToggleTheme(currentTheme: string) {
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    this.store.dispatch(changeTheme({ theme: newTheme }));
   }
 }

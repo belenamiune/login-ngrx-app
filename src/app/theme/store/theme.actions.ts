@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 
-export const setTheme = createAction(
-  '[Theme] Set Theme',
+export const changeTheme  = createAction(
+  '[Theme] Change Theme',
   props<{ theme: string }>()
 );

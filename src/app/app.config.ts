@@ -6,16 +6,17 @@ import { provideStore, } from '@ngrx/store';
 import {routerReducer } from "@ngrx/router-store";
 
 import { routes } from './app.routes';
-import { authReducer } from './store/auth/auth.reducer';
-import { themeReducer } from './store/theme/theme.reducer';
 import { provideEffects } from '@ngrx/effects';
-import { AuthEffects } from './store/auth/auth.effects';
+import { AuthEffects } from './auth/store/auth.effects';
+import { authReducer } from './auth/store/auth.reducer';
+import { ThemeEffects } from './theme/store/theme.effects';
+import { themeReducer } from './theme/store/theme.reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    provideEffects(AuthEffects),
+    provideEffects(AuthEffects, ThemeEffects),
     provideStore({
       route: routerReducer,
       auth: authReducer,

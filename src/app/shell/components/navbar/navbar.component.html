@@ -18,13 +18,12 @@
         <span class="font-bold">Please log in</span>
       </ng-template>
 
-      <button 
-      (click)="toggleTheme()"
-      class="p-2 rounded-full transition-all duration-300"
-    >
-      <span *ngIf="(theme$ | async) === 'light'">🌙</span>
-      <span *ngIf="(theme$ | async) === 'dark'">☀️</span>
-    </button>
+    
+        <button *ngIf="theme$ | async as theme" (click)="onToggleTheme(theme)" class="p-2 rounded-full transition-all duration-300"
+        >
+        <span *ngIf="(theme$ | async) === 'light'">🌙</span>
+        <span *ngIf="(theme$ | async) === 'dark'">☀️</span>
+      </button>
     </div>
   </div>
 </nav>

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUsername, selectIsAuthenticated } from '../../store/auth/auth.selectors';
 import { CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Book, BookService } from '../../services/book.service';
+import { selectIsAuthenticated, selectUsername } from '../../../auth/store/auth.selectors';
 
 @Component({
   selector: 'app-dashboard',

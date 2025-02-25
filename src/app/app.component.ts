@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavbarComponent } from './shared/navbar/navbar.component';
 import { Store } from '@ngrx/store';
-import { selectTheme } from './store/theme/theme.selectors';
+import { NavbarComponent } from './shell/components/navbar/navbar.component';
+import { ThemeService } from './theme/services/theme.service';
+import { changeTheme } from './theme/store/theme.actions';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +14,8 @@ import { selectTheme } from './store/theme/theme.selectors';
 })
 export class AppComponent {
   title = 'login-app-ngrx';
-    constructor(private store: Store) {
-      this.store.select(selectTheme).subscribe((theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-      });
-    }
+  constructor(private store: Store, private themeService: ThemeService) {
+    const savedTheme = this.themeService.getTheme();
+    this.store.dispatch(changeTheme({ theme: savedTheme }));
+  }
 }
