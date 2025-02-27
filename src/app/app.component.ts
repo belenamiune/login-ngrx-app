@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { NavbarComponent } from './shell/components/navbar/navbar.component';
-import { ThemeService } from './theme/services/theme.service';
-import { changeTheme } from './theme/store/theme.actions';
+import { NavbarComponent } from '@shell/components/navbar/navbar.component';
+import { ThemeService } from '@theme/services/theme.service';
+import { changeTheme } from '@theme/store/theme.actions';
 
 @Component({
   selector: 'app-root',

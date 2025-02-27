@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { tap } from 'rxjs/operators';
-import { changeTheme } from './theme.actions';
-import { ThemeService } from '../services/theme.service';
+import { changeTheme } from '@theme/store/theme.actions';
+import { ThemeService } from '@theme/services/theme.service';
 
 @Injectable()
 export class ThemeEffects {
-  constructor(private actions$: Actions, private themeService: ThemeService) {}
+  constructor(private actions$: Actions, private themeService: ThemeService) { }
 
   changeTheme$ = createEffect(
     () =>

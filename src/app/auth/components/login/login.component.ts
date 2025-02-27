@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { login } from '../../store/auth.actions';
-import { selectError, selectLoading } from '../../store/auth.selectors';
+import { login } from '@auth/store/auth.actions';
+import { selectError, selectLoading } from '@auth/store/auth.selectors';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginComponent {
       password: ['', Validators.required],
     });
   }
-  
+
   onLogin() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;

@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectUsername } from '../../../auth/store/auth.selectors';
-import { selectTheme } from '../../../theme/store/theme.selectors';
-import { logout } from '../../../auth/store/auth.actions';
-import { changeTheme } from '../../../theme/store/theme.actions';
+import { selectUsername } from '@auth/store/auth.selectors';
+import { selectTheme } from '@theme/store/theme.selectors';
+import { logout } from '@auth/store/auth.actions';
+import { changeTheme } from '@theme/store/theme.actions';
 import { Observable } from 'rxjs';
 
 @Component({

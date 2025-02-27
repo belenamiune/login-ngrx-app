@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import * as BooksActions from './books.actions';
+import * as BooksActions from '@books/store/books.actions';
 
 export interface LibraryResponse {
   key: string;

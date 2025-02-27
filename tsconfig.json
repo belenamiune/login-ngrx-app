@@ -1,6 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -14,7 +15,30 @@
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "es2015",
-    "module": "ES2022"
+    "module": "ES2022",
+    "paths": {
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@app/*": [
+        "src/app/*"
+      ],
+      "@shell/*": [
+        "src/app/shell/*"
+      ],
+      "@auth/*": [
+        "src/app/auth/*"
+      ],
+      "@features/*": [
+        "src/app/features/*"
+      ],
+      "@books/*": [
+        "src/app/books/*"
+      ],
+      "@theme/*": [
+        "src/app/theme/*"
+      ],
+    },
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
