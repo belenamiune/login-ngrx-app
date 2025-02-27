@@ -1,13 +1,13 @@
 # TODO
 
-<!-- ## Rutas
+ ## Rutas
 
 La ruta `path: '**'` es un wildcard y debería redirigir a una página específica "Page Not Found", o en todo caso a una página de Inicio/Landing o al Dashoboard en esta app. Al Login solo se debería redirigir cuando un usuario no autenticado intente entrar a una ruta protegida, o después de un Logout.
 
-Agregaría una ruta base `path:''` que redirija al dashboard. -->
+Agregaría una ruta base `path:''` que redirija al dashboard.
 
 
-<!-- ## Theme -->
+## Theme
 
 Pasaría la lógica de setear/obtener el theme a un servicio. En ese servicio podés centralizar acceder al `DOM` como al `localStorage`. POdés usar el `@Inject(DOCUMENT) private document: Document` para inyectar el `document` como dependencia y así poder mockearlo en los tests.
 

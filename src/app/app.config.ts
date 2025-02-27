@@ -11,16 +11,19 @@ import { AuthEffects } from './auth/store/auth.effects';
 import { authReducer } from './auth/store/auth.reducer';
 import { ThemeEffects } from './theme/store/theme.effects';
 import { themeReducer } from './theme/store/theme.reducer';
+import { booksReducer } from './books/store/books.reducer';
+import { BooksEffects } from './books/store/books.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
-    provideEffects(AuthEffects, ThemeEffects),
+    provideEffects(AuthEffects, ThemeEffects, BooksEffects),
     provideStore({
       route: routerReducer,
       auth: authReducer,
-      theme: themeReducer
+      theme: themeReducer,
+      books: booksReducer
     })
 ]
 };

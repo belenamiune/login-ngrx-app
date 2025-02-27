@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Book, BookService } from '../../services/book.service';
-import { selectIsAuthenticated, selectUsername } from '../../../auth/store/auth.selectors';
+import { selectUsername } from '../../../auth/store/auth.selectors';
+import { selectBooks, selectBooksLoading, selectBooksError } from '../../store/books.selectors';
+import { loadBooks } from '../../store/books.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,30 +11,21 @@ import { selectIsAuthenticated, selectUsername } from '../../../auth/store/auth.
   standalone: true,
   imports: [CommonModule]
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit{
   username$;
-  isAuthenticated$;
-  books$: Observable<Book[]> | undefined;
-  isLoading$ = new BehaviorSubject<boolean>(true);
-  error: string | undefined;
+  books$;
+  isLoading$;
+  error$;
   
-  constructor(private store: Store, private bookService: BookService) {
+  constructor(private store: Store) {
     this.username$ =  this.store.select(selectUsername);
-    this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
+    this.books$ = this.store.select(selectBooks);
+    this.isLoading$ = this.store.select(selectBooksLoading);
+    this.error$ = this.store.select(selectBooksError);
   }
 
   ngOnInit(): void {
-    this.books$ = this.bookService.getBooks();
-    this.books$.subscribe(
-      (books) => {
-        this.isLoading$.next(false);
-        console.log('Libros obtenidos:', books);
-      },
-      (error) => {
-        this.isLoading$.next(false);
-        this.error = 'Error al obtener los libros';
-        console.error('Error:', error);
-      }
-    );
+    this.store.dispatch(loadBooks());
   }
+
 }
