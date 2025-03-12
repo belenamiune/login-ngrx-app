@@ -13,19 +13,17 @@ export class AuthEffects {
     private router: Router
   ) { }
 
-
   login$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.login),
       switchMap(({ email, password }) =>
         this.authService.login(email, password).pipe(
-          map(({ token, username }) => {
-            if (!token) {
-              throw new Error('Credenciales incorrectas');
-            }
-            return AuthActions.loginSuccess({ token, username });
-          }),
-          catchError(() => of(AuthActions.loginError({ error: 'Credenciales incorrectas' })))
+          map(({ token, username }) =>
+            token
+              ? AuthActions.loginSuccess({ token, username })
+              : AuthActions.loginError({ error: 'Credenciales incorrectas' })
+          ),
+          catchError(() => of(AuthActions.loginError({ error: 'Error de autenticación' })))
         )
       )
     )
@@ -35,8 +33,8 @@ export class AuthEffects {
     () =>
       this.actions$.pipe(
         ofType(AuthActions.loginSuccess),
-        tap(({ token }) => {
-          localStorage.setItem('token', token);
+        tap(({ token, username }) => {
+          this.authService.setSession(token, username);
           this.router.navigate(['/dashboard']);
         })
       ),
@@ -48,7 +46,7 @@ export class AuthEffects {
       this.actions$.pipe(
         ofType(AuthActions.logout),
         tap(() => {
-          localStorage.removeItem('token');
+          this.authService.clearSession();
           this.router.navigate(['/login']);
         })
       ),
