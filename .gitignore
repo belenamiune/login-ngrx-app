@@ -9,3 +9,4 @@
 .history/*
 
 /.angular/cache
+package-lock.json

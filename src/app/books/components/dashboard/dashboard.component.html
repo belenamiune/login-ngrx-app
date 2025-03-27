@@ -1,0 +1,30 @@
+<div *ngIf="username$ | async as username">
+  
+  <div *ngIf="isLoading$ | async" class="flex justify-center items-center h-screen">
+    <div class="animate-spin border-t-4 border-blue-500 w-16 h-16 border-solid rounded-full"></div>
+  </div>
+
+  <div *ngIf="error$ | async as error" class="text-red-500 text-center">
+    <p>{{ error }}</p>
+  </div>
+  <div *ngIf="books$ | async as books" class="max-w-screen-lg mx-auto mt-8 px-4">
+    <div class="overflow-x-auto shadow-lg rounded-lg p-4">
+      <table class="min-w-full table-auto border-2 border-b-blue-950">
+        <thead>
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Title</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Author</th>
+            <th class="px-6 py-3 text-left text-sm font-semibold">Published Date</th>
+          </tr>
+        </thead>
+        <tbody  *ngIf="(books$ | async) as books">
+          <tr *ngFor="let book of books; let i = index" class="border-b">
+            <td class="px-6 py-3">{{ book.title }}</td>
+            <td class="px-6 py-3">{{ book.author || 'Unknown' }}</td>
+            <td class="px-6 py-3">{{ book.first_publish_year || 'Unknown' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
